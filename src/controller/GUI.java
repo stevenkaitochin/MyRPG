@@ -29,16 +29,20 @@ public class GUI extends JFrame {
 
 	private void setupMenu() {
 		JMenuItem mainMenu = new JMenu("Options");
-		JMenuItem saveState = new JMenuItem("Save Current State");
-		JMenuItem loadState = new JMenuItem("Load Previous State");
-		mainMenu.add(saveState);
-		mainMenu.add(loadState);
+		JMenuItem resetCharacters = new JMenuItem("Reset Characters");
+		JMenuItem saveCharacters = new JMenuItem("Save Characters");
+		JMenuItem loadCharacters = new JMenuItem("Load Characters");
+		mainMenu.add(resetCharacters);
+		mainMenu.add(saveCharacters);
+		mainMenu.add(loadCharacters);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		menuBar.add(mainMenu);
 		
 	    MenuItemListener menuListener = new MenuItemListener();
-	    saveState.addActionListener(menuListener);
+	    resetCharacters.addActionListener(menuListener);
+	    saveCharacters.addActionListener(menuListener);
+	    loadCharacters.addActionListener(menuListener);
 	}
 }
