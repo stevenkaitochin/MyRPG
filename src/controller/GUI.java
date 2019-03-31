@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -32,12 +33,13 @@ public class GUI extends JFrame {
 		this.setLocation(150, 50);
 		this.setSize(1600, 900);
 		this.setTitle("MyRPG");
+		this.setLayout(new BorderLayout());
+		
+		game = new Game();
 		
 		setupMenu();
 		addButtons(this);
 		addArenaView(this);
-		
-		game = new Game();
 	}
 
 	public static void main(String[] args) {
@@ -86,6 +88,7 @@ public class GUI extends JFrame {
 	
 		buttonGroupLeft = new ButtonGroup();
 		for (JRadioButton button: radioButtonsLeft) {
+			button.setActionCommand(button.getText());
 			buttonGroupLeft.add(button);
 			jRadioPanelLeft.add(button);
 		}
@@ -108,6 +111,7 @@ public class GUI extends JFrame {
 	
 		buttonGroupRight = new ButtonGroup();
 		for (JRadioButton button: radioButtonsRight) {
+			button.setActionCommand(button.getText());
 			buttonGroupRight.add(button);
 			jRadioPanelRight.add(button);
 		}
@@ -123,14 +127,12 @@ public class GUI extends JFrame {
 		jpanel.add(jRadioPanelLeft);
 		jpanel.add(fightButton);
 		jpanel.add(jRadioPanelRight);
-		gui.add(jpanel);
+		gui.add(jpanel, BorderLayout.NORTH);
 	}
 
 	private void addArenaView(GUI gui) {
-		JPanel arenaPanel = new JPanel();
 		arena = new Arena(game, null, null);
-		arenaPanel.add(arena);
-		//gui.add(arenaPanel);
+		gui.add(arena.getArena(), BorderLayout.SOUTH);
 	}
 
 	private class MenuItemListener implements ActionListener {

@@ -12,7 +12,7 @@ public class Character implements Serializable {
 
 	public String type;
 	public int lv, xp, lv_xp;
-	public double hp, atk, def, sp_atk, sp_def, spd;
+	public double hp, curr_hp, atk, curr_atk, def, curr_def, sp_atk, curr_sp_atk, sp_def, curr_sp_def, spd, curr_spd;
 	public BufferedImage img;
 	
 	public Character(String type, int lv, double hp, double atk, double def, double sp_atk, double sp_def, double spd, int lv_xp, String fileStr) {

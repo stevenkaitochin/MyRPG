@@ -2,7 +2,6 @@ package view;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 import java.util.Observer;
@@ -20,9 +19,10 @@ public class Arena extends JPanel implements Observer {
 	private Game game;
 	private Character leftCharacter, rightCharacter;
 	private BufferedImage leftCharacterImage, rightCharacterImage;
+	private JPanel arenaPanel;
 
 	public Arena(Game game, String leftSelection, String rightSelection) {
-		JPanel arena = new JPanel();
+		arenaPanel = new JPanel();
 		
 		if (leftSelection == null && rightSelection == null) {
 			return;
@@ -38,9 +38,13 @@ public class Arena extends JPanel implements Observer {
 			JLabel leftLabel = new JLabel(new ImageIcon(leftCharacterImage));
 			JLabel rightLabel = new JLabel(new ImageIcon(rightCharacterImage));
 			
-			arena.add(leftLabel);
-			arena.add(rightLabel);
+			arenaPanel.add(leftLabel);
+			arenaPanel.add(rightLabel);
 		}
+	}
+	
+	public JPanel getArena() {
+		return arenaPanel;
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -53,7 +57,6 @@ public class Arena extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		repaint();
 	}
 }
