@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -22,7 +21,6 @@ public class GUI extends JFrame {
 		this.setLocation(150, 50);
 		this.setSize(1600, 900);
 		this.setTitle("MyRPG");
-		this.setLayout(new FlowLayout());
 		
 		game = new Game();
 		arena = new Arena(game);

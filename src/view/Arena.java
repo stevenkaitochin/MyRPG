@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,12 +33,15 @@ public class Arena extends JPanel implements Observer {
 	private BufferedImage leftCharacterImage, rightCharacterImage;
 	private JButton fightButton;
 	private ButtonGroup buttonGroupLeft, buttonGroupRight;
+	private JPanel characterPanel;
+	private JLabel leftLabel, rightLabel;
 
 	public Arena(Game game) {
 		this.game = game;
-		setSize(1600, 900);
-		
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
 		addButtons();
+		addArena(game);
 	}
 	
 	private void addButtons() {
@@ -103,6 +108,21 @@ public class Arena extends JPanel implements Observer {
 		add(jButtonPanel);
 	}
 	
+	public void addArena(Game game) {
+		setBackground(Color.WHITE);
+		
+		characterPanel = new JPanel();
+		characterPanel.setPreferredSize(new Dimension(1600, 600));
+		characterPanel.setBackground(Color.WHITE);
+		
+		leftLabel = new JLabel();
+		rightLabel = new JLabel();
+		
+		characterPanel.add(leftLabel);
+		characterPanel.add(rightLabel);
+		add(characterPanel);
+	}
+	
 	public void changeArena(Game game, String leftSelection, String rightSelection) {
 		if (leftSelection != null && rightSelection != null) {
 			leftCharacter = game.getCharacter(leftSelection);
@@ -110,12 +130,10 @@ public class Arena extends JPanel implements Observer {
 			
 			leftCharacterImage = game.getCharacter(leftSelection).img;
 			rightCharacterImage = game.getCharacter(rightSelection).img;
-			
-			JLabel leftLabel = new JLabel(new ImageIcon(leftCharacterImage));
-			JLabel rightLabel = new JLabel(new ImageIcon(rightCharacterImage));
-
-            add(leftLabel);
-			add(rightLabel);
+	    	
+	    	leftLabel.setIcon(new ImageIcon(leftCharacterImage));
+	    	rightLabel.setIcon(new ImageIcon(rightCharacterImage));
+	    	repaint();
 		}
 	}
 	
@@ -128,8 +146,8 @@ public class Arena extends JPanel implements Observer {
 		Graphics2D g2 = (Graphics2D) g;
 		
 		if (leftCharacterImage != null && rightCharacterImage != null) {
-			g2.drawImage(leftCharacterImage, 0, 50, null);
-			g2.drawImage(rightCharacterImage, 0, 100, null);	
+			g2.drawImage(leftCharacterImage, 0, 0, null);
+			g2.drawImage(rightCharacterImage, 0, 0, null);	
 		}
 	}
 

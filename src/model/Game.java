@@ -55,7 +55,7 @@ public class Game implements Serializable {
 	}
 	
 	public static void startBattle(Character leftCharacter, Character rightCharacter) {
-		
+
 	}
 	
 	public static void levelUpCharacter(Character character) {
