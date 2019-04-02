@@ -27,6 +27,8 @@ public class GUI extends JFrame implements Serializable {
 		game = new Game();
 		arena = new Arena(game);
 		
+		game.addObserver(arena);
+		
 		setupMenu();
 		addArenaView(arena);
 	}

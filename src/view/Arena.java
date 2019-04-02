@@ -35,8 +35,10 @@ public class Arena extends JPanel implements Observer {
 	private Character leftCharacter, rightCharacter;
 	
 	private BufferedImage leftCharacterImage, rightCharacterImage;
-	private BufferedImage wardenImg, spearmanImg, berserkerImg, raiderImg, knightImg, archerImg,
-						  ninjaImg, samuraiImg, wizardImg, mageImg, lichImg;
+	private BufferedImage wardenLeftImg, spearmanLeftImg, berserkerLeftImg, raiderLeftImg, knightLeftImg, archerLeftImg,
+						  ninjaLeftImg, samuraiLeftImg, wizardLeftImg, mageLeftImg, lichLeftImg,
+						  wardenRightImg, spearmanRightImg, berserkerRightImg, raiderRightImg, knightRightImg, archerRightImg,
+						  ninjaRightImg, samuraiRightImg, wizardRightImg, mageRightImg, lichRightImg;
 	
 	private JButton fightButton;
 	private ButtonGroup buttonGroupLeft, buttonGroupRight;
@@ -121,17 +123,28 @@ public class Arena extends JPanel implements Observer {
 	
 	private void loadImages() {
 		try {
-			wardenImg = ImageIO.read(new File("images/warden.png"));
-			spearmanImg = ImageIO.read(new File("images/spearman.png"));
-			berserkerImg = ImageIO.read(new File("images/berserker.png"));
-			raiderImg = ImageIO.read(new File("images/raider.png"));
-			knightImg = ImageIO.read(new File("images/knight.png"));
-			archerImg = ImageIO.read(new File("images/archer.png"));
-			ninjaImg = ImageIO.read(new File("images/ninja.png"));
-			samuraiImg = ImageIO.read(new File("images/samurai.png"));
-			wizardImg = ImageIO.read(new File("images/wizard.png"));
-			mageImg = ImageIO.read(new File("images/mage.png"));
-			lichImg = ImageIO.read(new File("images/lich.png"));
+			wardenLeftImg = ImageIO.read(new File("images/wardenLeft.png"));
+			wardenRightImg = ImageIO.read(new File("images/wardenRight.png"));
+			spearmanLeftImg = ImageIO.read(new File("images/spearmanLeft.png"));
+			spearmanRightImg = ImageIO.read(new File("images/spearmanRight.png"));
+			berserkerLeftImg = ImageIO.read(new File("images/berserkerLeft.png"));
+			berserkerRightImg = ImageIO.read(new File("images/berserkerRight.png"));
+			raiderLeftImg = ImageIO.read(new File("images/raiderLeft.png"));
+			raiderRightImg = ImageIO.read(new File("images/raiderRight.png"));
+			knightLeftImg = ImageIO.read(new File("images/knightLeft.png"));
+			knightRightImg = ImageIO.read(new File("images/knightRight.png"));
+			archerLeftImg = ImageIO.read(new File("images/archerLeft.png"));
+			archerRightImg = ImageIO.read(new File("images/archerRight.png"));
+			ninjaLeftImg = ImageIO.read(new File("images/ninjaLeft.png"));
+			ninjaRightImg = ImageIO.read(new File("images/ninjaRight.png"));
+			samuraiLeftImg = ImageIO.read(new File("images/samuraiLeft.png"));
+			samuraiRightImg = ImageIO.read(new File("images/samuraiRight.png"));
+			wizardLeftImg = ImageIO.read(new File("images/wizardLeft.png"));
+			wizardRightImg = ImageIO.read(new File("images/wizardRight.png"));
+			mageLeftImg = ImageIO.read(new File("images/mageLeft.png"));
+			mageRightImg = ImageIO.read(new File("images/mageRight.png"));
+			lichLeftImg = ImageIO.read(new File("images/lichLeft.png"));
+			lichRightImg = ImageIO.read(new File("images/lichRight.png"));
 		} catch (IOException e) {
 			System.out.println("Cannot find image path");
 		}
@@ -172,73 +185,73 @@ public class Arena extends JPanel implements Observer {
 			
 			switch (leftSelection) {
 			case "Warden":
-				leftCharacterImage = wardenImg;
+				leftCharacterImage = wardenLeftImg;
 				break;
 			case "Spearman":
-				leftCharacterImage = spearmanImg;
+				leftCharacterImage = spearmanLeftImg;
 				break;
 			case "Berserker":
-				leftCharacterImage = berserkerImg;
+				leftCharacterImage = berserkerLeftImg;
 				break;
 			case "Raider":
-				leftCharacterImage = raiderImg;
+				leftCharacterImage = raiderLeftImg;
 				break;
 			case "Knight":
-				leftCharacterImage = knightImg;
+				leftCharacterImage = knightLeftImg;
 				break;
 			case "Archer":
-				leftCharacterImage = archerImg;
+				leftCharacterImage = archerLeftImg;
 				break;
 			case "Ninja":
-				leftCharacterImage = ninjaImg;
+				leftCharacterImage = ninjaLeftImg;
 				break;
 			case "Samurai":
-				leftCharacterImage = samuraiImg;
+				leftCharacterImage = samuraiLeftImg;
 				break;
 			case "Wizard":
-				leftCharacterImage = wizardImg;
+				leftCharacterImage = wizardLeftImg;
 				break;
 			case "Mage":
-				leftCharacterImage = mageImg;
+				leftCharacterImage = mageLeftImg;
 				break;
 			case "Lich":
-				leftCharacterImage = lichImg;
+				leftCharacterImage = lichLeftImg;
 				break;
 			}
 			
 			switch (rightSelection) {
 			case "Warden":
-				rightCharacterImage = wardenImg;
+				rightCharacterImage = wardenRightImg;
 				break;
 			case "Spearman":
-				rightCharacterImage = spearmanImg;
+				rightCharacterImage = spearmanRightImg;
 				break;
 			case "Berserker":
-				rightCharacterImage = berserkerImg;
+				rightCharacterImage = berserkerRightImg;
 				break;
 			case "Raider":
-				rightCharacterImage = raiderImg;
+				rightCharacterImage = raiderRightImg;
 				break;
 			case "Knight":
-				rightCharacterImage = knightImg;
+				rightCharacterImage = knightRightImg;
 				break;
 			case "Archer":
-				rightCharacterImage = archerImg;
+				rightCharacterImage = archerRightImg;
 				break;
 			case "Ninja":
-				rightCharacterImage = ninjaImg;
+				rightCharacterImage = ninjaRightImg;
 				break;
 			case "Samurai":
-				rightCharacterImage = samuraiImg;
+				rightCharacterImage = samuraiRightImg;
 				break;
 			case "Wizard":
-				rightCharacterImage = wizardImg;
+				rightCharacterImage = wizardRightImg;
 				break;
 			case "Mage":
-				rightCharacterImage = mageImg;
+				rightCharacterImage = mageRightImg;
 				break;
 			case "Lich":
-				rightCharacterImage = lichImg;
+				rightCharacterImage = lichRightImg;
 				break;
 			}
 	    	
@@ -272,7 +285,17 @@ public class Arena extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		arenaGrid[0][1].setText("Updated");
+		Object newValues[] = (Object[]) arg;
+		if ((int)newValues[0] == 1) {
+			arenaGrid[0][3].setText("<html>" + rightCharacter.type + " lv. " + rightCharacter.lv + "<br><br>" + 
+				"HP:&nbsp;&nbsp;&nbsp;" + (double)newValues[2]  + " / " + rightCharacter.hp + "</html>");
+		}
+		else if ((int)newValues[0] == 2) {
+			arenaGrid[0][1].setText("<html>" + leftCharacter.type + " lv. " + leftCharacter.lv + "<br><br>" + 
+				"HP:&nbsp;&nbsp;&nbsp;" + (double)newValues[1]  + " / " + leftCharacter.hp + "</html>");
+		}
+		arenaGrid[2][1].setText("<html>" + "XP:&nbsp;&nbsp;&nbsp;" + (int)newValues[3] + " / " + leftCharacter.lv_xp + "<br><br></html>");
+		arenaGrid[2][3].setText("<html>" + "XP:&nbsp;&nbsp;&nbsp;" + (int)newValues[4] + " / " + rightCharacter.lv_xp + "<br><br></html>");
 		repaint();
 	}
 	
@@ -288,7 +311,7 @@ public class Arena extends JPanel implements Observer {
 					changeArena(game, buttonGroupLeft.getSelection().getActionCommand(), buttonGroupRight.getSelection().getActionCommand());
 					repaint();
 					validate();
-					Game.startBattle(leftCharacter, rightCharacter);
+					game.startBattle(leftCharacter, rightCharacter);
 				}
 				else {
 					System.err.println("You must select two characters to battle.");
