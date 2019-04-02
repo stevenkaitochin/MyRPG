@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -9,11 +10,14 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -30,9 +34,16 @@ public class Arena extends JPanel implements Observer {
 	
 	private Game game;
 	private Character leftCharacter, rightCharacter;
+	
 	private BufferedImage leftCharacterImage, rightCharacterImage;
+	private BufferedImage wardenImg, spearmanImg, berserkerImg, raiderImg, knightImg, archerImg,
+						  ninjaImg, samuraiImg, wizardImg, mageImg, lichImg;
+	
 	private JButton fightButton;
 	private ButtonGroup buttonGroupLeft, buttonGroupRight;
+	
+	private JLabel arenaGrid[][];
+	
 	private JPanel characterPanel;
 	private JLabel leftLabel, rightLabel;
 
@@ -41,6 +52,7 @@ public class Arena extends JPanel implements Observer {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		addButtons();
+		loadImages();
 		addArena(game);
 	}
 	
@@ -108,18 +120,49 @@ public class Arena extends JPanel implements Observer {
 		add(jButtonPanel);
 	}
 	
+	private void loadImages() {
+		try {
+			wardenImg = ImageIO.read(new File("images/warden.png"));
+			spearmanImg = ImageIO.read(new File("images/spearman.png"));
+			berserkerImg = ImageIO.read(new File("images/berserker.png"));
+			raiderImg = ImageIO.read(new File("images/raider.png"));
+			knightImg = ImageIO.read(new File("images/knight.png"));
+			archerImg = ImageIO.read(new File("images/archer.png"));
+			ninjaImg = ImageIO.read(new File("images/ninja.png"));
+			samuraiImg = ImageIO.read(new File("images/samurai.png"));
+			wizardImg = ImageIO.read(new File("images/wizard.png"));
+			mageImg = ImageIO.read(new File("images/mage.png"));
+			lichImg = ImageIO.read(new File("images/lich.png"));
+		} catch (IOException e) {
+			System.out.println("Cannot find image path");
+		}
+	}
+	
 	public void addArena(Game game) {
 		setBackground(Color.WHITE);
 		
 		characterPanel = new JPanel();
-		characterPanel.setPreferredSize(new Dimension(1600, 600));
+		characterPanel.setPreferredSize(new Dimension(1200, 600));
 		characterPanel.setBackground(Color.WHITE);
+		characterPanel.setLayout(new GridLayout(3, 4));
+		
+		int r = 3;
+		int c = 5;
+	    arenaGrid = new JLabel[r][c];    
+
+		for(int i = 0; i < r; i++) {
+		   for(int j = 0; j < c; j++) {
+		      arenaGrid[i][j] = new JLabel();
+		      characterPanel.add(arenaGrid[i][j]);
+		   }
+		}
 		
 		leftLabel = new JLabel();
-		rightLabel = new JLabel();
+		leftLabel = arenaGrid[1][1];
 		
-		characterPanel.add(leftLabel);
-		characterPanel.add(rightLabel);
+		rightLabel = new JLabel();
+		rightLabel = arenaGrid[1][3];
+
 		add(characterPanel);
 	}
 	
@@ -128,9 +171,81 @@ public class Arena extends JPanel implements Observer {
 			leftCharacter = game.getCharacter(leftSelection);
 			rightCharacter = game.getCharacter(rightSelection);
 			
-			leftCharacterImage = game.getCharacter(leftSelection).img;
-			rightCharacterImage = game.getCharacter(rightSelection).img;
+			switch (leftSelection) {
+			case "Warden":
+				leftCharacterImage = wardenImg;
+				break;
+			case "Spearman":
+				leftCharacterImage = spearmanImg;
+				break;
+			case "Berserker":
+				leftCharacterImage = berserkerImg;
+				break;
+			case "Raider":
+				leftCharacterImage = raiderImg;
+				break;
+			case "Knight":
+				leftCharacterImage = knightImg;
+				break;
+			case "Archer":
+				leftCharacterImage = archerImg;
+				break;
+			case "Ninja":
+				leftCharacterImage = ninjaImg;
+				break;
+			case "Samurai":
+				leftCharacterImage = samuraiImg;
+				break;
+			case "Wizard":
+				leftCharacterImage = wizardImg;
+				break;
+			case "Mage":
+				leftCharacterImage = mageImg;
+				break;
+			case "Lich":
+				leftCharacterImage = lichImg;
+				break;
+			}
+			
+			switch (rightSelection) {
+			case "Warden":
+				rightCharacterImage = wardenImg;
+				break;
+			case "Spearman":
+				rightCharacterImage = spearmanImg;
+				break;
+			case "Berserker":
+				rightCharacterImage = berserkerImg;
+				break;
+			case "Raider":
+				rightCharacterImage = raiderImg;
+				break;
+			case "Knight":
+				rightCharacterImage = knightImg;
+				break;
+			case "Archer":
+				rightCharacterImage = archerImg;
+				break;
+			case "Ninja":
+				rightCharacterImage = ninjaImg;
+				break;
+			case "Samurai":
+				rightCharacterImage = samuraiImg;
+				break;
+			case "Wizard":
+				rightCharacterImage = wizardImg;
+				break;
+			case "Mage":
+				rightCharacterImage = mageImg;
+				break;
+			case "Lich":
+				rightCharacterImage = lichImg;
+				break;
+			}
 	    	
+			arenaGrid[0][1].setText(leftCharacter.type + " " + Double.toString(leftCharacter.hp));
+			arenaGrid[0][3].setText(rightCharacter.type + " " + Double.toString(rightCharacter.hp));
+					
 	    	leftLabel.setIcon(new ImageIcon(leftCharacterImage));
 	    	rightLabel.setIcon(new ImageIcon(rightCharacterImage));
 	    	repaint();
@@ -147,12 +262,14 @@ public class Arena extends JPanel implements Observer {
 		
 		if (leftCharacterImage != null && rightCharacterImage != null) {
 			g2.drawImage(leftCharacterImage, 0, 0, null);
-			g2.drawImage(rightCharacterImage, 0, 0, null);	
+			g2.drawImage(rightCharacterImage, 0, 0, null);
+
 		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
+		arenaGrid[0][1].setText("Updated");
 		repaint();
 	}
 	
@@ -168,6 +285,7 @@ public class Arena extends JPanel implements Observer {
 					changeArena(game, buttonGroupLeft.getSelection().getActionCommand(), buttonGroupRight.getSelection().getActionCommand());
 					repaint();
 					validate();
+					Game.startBattle(leftCharacter, rightCharacter);
 				}
 				else {
 					System.err.println("You must select two characters to battle.");
