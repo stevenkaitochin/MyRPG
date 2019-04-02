@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -243,12 +242,16 @@ public class Arena extends JPanel implements Observer {
 				break;
 			}
 	    	
-			arenaGrid[0][1].setText(leftCharacter.type + " " + Double.toString(leftCharacter.hp));
-			arenaGrid[0][3].setText(rightCharacter.type + " " + Double.toString(rightCharacter.hp));
-					
+			arenaGrid[0][1].setText("<html>" + leftCharacter.type + " lv. " + leftCharacter.lv + "<br><br>" + 
+									"HP:&nbsp;&nbsp;&nbsp;" + leftCharacter.hp + " / " + leftCharacter.hp + "</html>");
+			arenaGrid[0][3].setText("<html>" + rightCharacter.type + " lv. " + rightCharacter.lv + "<br><br>" + 
+									"HP:&nbsp;&nbsp;&nbsp;" + rightCharacter.hp + " / " + rightCharacter.hp + "</html>");
+			
 	    	leftLabel.setIcon(new ImageIcon(leftCharacterImage));
 	    	rightLabel.setIcon(new ImageIcon(rightCharacterImage));
-	    	repaint();
+	    	
+			arenaGrid[2][1].setText("<html>" + "XP:&nbsp;&nbsp;&nbsp;" + leftCharacter.xp + " / " + leftCharacter.lv_xp + "<br><br></html>");
+			arenaGrid[2][3].setText("<html>" + "XP:&nbsp;&nbsp;&nbsp;" + rightCharacter.xp + " / " + rightCharacter.lv_xp + "<br><br></html>");
 		}
 	}
 	
