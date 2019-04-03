@@ -18,6 +18,8 @@ public class Game extends Observable implements Serializable {
 
 	private static List<Character> characters;
 	
+	private boolean finished;
+	
 	public Game() {
 		// Try to read from file
 		// Else 
@@ -124,6 +126,8 @@ public class Game extends Observable implements Serializable {
 		rightCharacter.curr_sp_def = rightCharacter.sp_def;
 		rightCharacter.curr_spd = rightCharacter.spd;
 		
+		finished = false;
+		
 		Timer leftTimer = new Timer();
 		Timer rightTimer = new Timer();
 		
@@ -175,14 +179,14 @@ public class Game extends Observable implements Serializable {
 			this.right_curr_def = right_curr_def;
 			this.right_curr_sp_atk = right_curr_sp_atk;
 			this.right_curr_sp_def = right_curr_sp_def;
-			
 		}
 		public void run() {
-			if (left_curr_hp > 0 && right_curr_hp > 0) {
+			if (left_curr_hp > 0 && right_curr_hp > 0 && !finished) {
 				if (whichCharacter == 1) {
 					right_curr_hp -= calculateDamage(left_curr_atk, left_curr_sp_atk, right_curr_def, right_curr_sp_def);
 					if (right_curr_hp < 0) {
 						right_curr_hp = 0;
+						finished = true;
 					}
 					Object newValues[] = {1, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
 					setChanged();
@@ -192,13 +196,14 @@ public class Game extends Observable implements Serializable {
 					left_curr_hp -= calculateDamage(right_curr_atk, right_curr_sp_atk, left_curr_def, left_curr_sp_def);
 					if (left_curr_hp < 0) {
 						left_curr_hp = 0;
+						finished = true;
 					}
 					Object newValues[] = {2, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
 					setChanged();
 					notifyObservers(newValues);
 				}
 			}
-			else {
+			else if (finished) {
 				if (left_curr_hp == 0 && right_curr_hp == 0) {
 					int leftRemainder = leftCharacter.lv_xp - leftCharacter.xp;
 					if (leftCharacter.type.equals(rightCharacter.type)) {
@@ -210,6 +215,7 @@ public class Game extends Observable implements Serializable {
 							leftCharacter.xp += 3;
 						}
 						Object newValues[] = {1, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
+						finished = true;
 						setChanged();
 						notifyObservers(newValues);
 						this.cancel();
@@ -219,12 +225,14 @@ public class Game extends Observable implements Serializable {
 							levelUpCharacter(leftCharacter);
 							leftCharacter.xp = 3 - leftRemainder;
 							Object newValues[] = {1, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
+							finished = true;
 							setChanged();
 							notifyObservers(newValues);
 						}
 						else {
 							leftCharacter.xp += 3;
 							Object newValues[] = {1, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
+							finished = true;
 							setChanged();
 							notifyObservers(newValues);
 						}
@@ -233,12 +241,14 @@ public class Game extends Observable implements Serializable {
 							levelUpCharacter(rightCharacter);
 							rightCharacter.xp = 3 - rightRemainder;
 							Object newValues[] = {2, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
+							finished = true;
 							setChanged();
 							notifyObservers(newValues);
 						}
 						else {
 							rightCharacter.xp += 3;	
 							Object newValues[] = {2, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
+							finished = true;
 							setChanged();
 							notifyObservers(newValues);
 						}
@@ -251,12 +261,14 @@ public class Game extends Observable implements Serializable {
 						levelUpCharacter(leftCharacter);
 						leftCharacter.xp = 1 - leftRemainder;
 						Object newValues[] = {1, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
+						finished = true;
 						setChanged();
 						notifyObservers(newValues);
 					}
 					else {
 						leftCharacter.xp += 1;
 						Object newValues[] = {1, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
+						finished = true;
 						setChanged();
 						notifyObservers(newValues);
 					}
@@ -265,12 +277,14 @@ public class Game extends Observable implements Serializable {
 						levelUpCharacter(rightCharacter);
 						rightCharacter.xp = 5 - rightRemainder;
 						Object newValues[] = {2, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
+						finished = true;
 						setChanged();
 						notifyObservers(newValues);
 					}
 					else {
 						rightCharacter.xp += 5;	
 						Object newValues[] = {2, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
+						finished = true;
 						setChanged();
 						notifyObservers(newValues);
 					}
@@ -282,12 +296,14 @@ public class Game extends Observable implements Serializable {
 						levelUpCharacter(leftCharacter);
 						leftCharacter.xp = 5 - leftRemainder;
 						Object newValues[] = {1, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
+						finished = true;
 						setChanged();
 						notifyObservers(newValues);
 					}
 					else {
 						leftCharacter.xp += 5;
 						Object newValues[] = {1, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
+						finished = true;
 						setChanged();
 						notifyObservers(newValues);
 					}
@@ -296,12 +312,14 @@ public class Game extends Observable implements Serializable {
 						levelUpCharacter(rightCharacter);
 						rightCharacter.xp = 1 - rightRemainder;
 						Object newValues[] = {2, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
+						finished = true;
 						setChanged();
 						notifyObservers(newValues);
 					}
 					else {
 						rightCharacter.xp += 1;	
 						Object newValues[] = {2, round(left_curr_hp, 2), round(right_curr_hp,2), leftCharacter.xp, rightCharacter.xp};
+						finished = true;
 						setChanged();
 						notifyObservers(newValues);
 					}

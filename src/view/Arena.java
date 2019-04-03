@@ -279,7 +279,6 @@ public class Arena extends JPanel implements Observer {
 		if (leftCharacterImage != null && rightCharacterImage != null) {
 			g2.drawImage(leftCharacterImage, 0, 0, null);
 			g2.drawImage(rightCharacterImage, 0, 0, null);
-
 		}
 	}
 
