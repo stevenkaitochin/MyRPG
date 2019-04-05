@@ -182,6 +182,7 @@ public class Game extends Observable implements Serializable {
 		}
 		public void run() {
 			if (left_curr_hp > 0 && right_curr_hp > 0 && !finished) {
+				System.out.println("LEFT " + left_curr_hp + "\nRIGHT " + right_curr_hp);
 				if (whichCharacter == 1) {
 					right_curr_hp -= calculateDamage(left_curr_atk, left_curr_sp_atk, right_curr_def, right_curr_sp_def);
 					if (right_curr_hp < 0) {
