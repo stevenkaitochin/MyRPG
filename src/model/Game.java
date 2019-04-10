@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -42,11 +44,11 @@ public class Game extends Observable implements Serializable {
 		// Weapon: Daggers				Ability1: NinjaShurikens - Attacks twice in quick succession and lowers target's speed by 50% for 3 seconds
 		characters.add(new Character("Ninja", 		1, 75.0, 	7.5, 	1.75, 	0.0, 	5.0, 	1.25, 15));
 		// Weapon: TantoKatana			Ability1: MagicCloak - Blocks 50% magic damage for 3 seconds
-		characters.add(new Character("Samurai", 	1, 100.0, 	15.0, 	5.0, 	2.5, 	12.5, 	0.50, 20));
+		characters.add(new Character("Samurai", 	1, 100.0, 	15.0, 	5.0, 	2.5, 	12.5, 	0.50, 15));
 		// Weapon: Staff				Ability1: AncientKnowledge - Heals self by 50% total health 
 		characters.add(new Character("Wizard", 		1, 125.0, 	2.5, 	1.75, 	7.5, 	15.0, 	0.75, 10));
 		// Weapon: Elemental			Ability1: FireBlast - Deals double magic damage and lowers target's magic defense by 25% for 3 seconds
-		characters.add(new Character("Mage", 		1, 50.0, 	2.5,	1.0, 	15.0, 	10.0, 	1.00, 15));
+		characters.add(new Character("Mage", 		1, 50.0, 	2.5,	1.0, 	15.0, 	10.0, 	1.00, 20));
 		// Weapon: Mace					Ability1: UndeadCurse - Steals 10% of target's attack, defense, spAtk, spDef, and speed permanently at the cost of 20% health
 		characters.add(new Character("Lich", 		1, 500.0, 	5.0,	1.0,	5.0,	1.0,	0.25, 25));
 	}
@@ -60,12 +62,6 @@ public class Game extends Observable implements Serializable {
 		}
 		return characters.get(index);
 	}
-
-//	public static BigDecimal round(double value) {
-//		BigDecimal num = new BigDecimal(value);
-//		DecimalFormat df = new DecimalFormat("###.##");
-//		return Double.valueOf(df.format(num));
-//	}
 	
 	public static void levelUpCharacter(Character character) {
 		character.changeLevel(character, 1);
@@ -145,8 +141,16 @@ public class Game extends Observable implements Serializable {
 		
 		damage += attack * physicalReduction;
 		damage += spec_attack * magicReduction;
+
+		return round(damage);
+	}
+	
+	private static double round(double damage) {
+		BigDecimal bd = new BigDecimal(damage).setScale(4, RoundingMode.HALF_UP);
 		
-		return damage;
+		double roundedDamage = bd.doubleValue(); 
+
+		return roundedDamage;	
 	}
 	
 	
@@ -169,6 +173,7 @@ public class Game extends Observable implements Serializable {
 					if (rightCharacter.curr_hp <= 0) {
 						rightCharacter.curr_hp = 0;
 						finished = true;
+						finishBattle();
 					}
 					setChanged();
 					notifyObservers();
@@ -179,37 +184,42 @@ public class Game extends Observable implements Serializable {
 					if (leftCharacter.curr_hp <= 0) {
 						leftCharacter.curr_hp = 0;
 						finished = true;
+						finishBattle();
 					}
 					setChanged();
 					notifyObservers();
 				}
 			}
-			else if (finished) {
+		}
+		public void finishBattle() {
+			if (finished) {
+				leftTimer.cancel();
+				rightTimer.cancel();
 				if (leftCharacter.curr_hp == 0 && rightCharacter.curr_hp == 0) {
 					int leftRemainder = leftCharacter.lv_xp - leftCharacter.xp;
-					if (leftRemainder <= 3) {
+					if (leftRemainder <= (3 * rightCharacter.lv)) {
 						levelUpCharacter(leftCharacter);
-						leftCharacter.xp = 3 - leftRemainder;
+						leftCharacter.xp = (3 * rightCharacter.lv) - leftRemainder;
 						finished = true;
 						setChanged();
 						notifyObservers();
 					}
 					else {
-						leftCharacter.xp += 3;
+						leftCharacter.xp += (3 * rightCharacter.lv);
 						finished = true;
 						setChanged();
 						notifyObservers();
 					}
 					int rightRemainder = rightCharacter.lv_xp - rightCharacter.xp;
-					if (rightRemainder <= 3) {
+					if (rightRemainder <= (3 * leftCharacter.lv)) {
 						levelUpCharacter(rightCharacter);
-						rightCharacter.xp = 3 - rightRemainder;
+						rightCharacter.xp = (3 * leftCharacter.lv) - rightRemainder;
 						finished = true;
 						setChanged();
 						notifyObservers();
 					}
 					else {
-						rightCharacter.xp += 3;	
+						rightCharacter.xp += (3 * leftCharacter.lv);	
 						finished = true;
 						setChanged();
 						notifyObservers();
@@ -220,29 +230,29 @@ public class Game extends Observable implements Serializable {
 				}
 				else if (leftCharacter.curr_hp == 0 && rightCharacter.curr_hp > 0) {
 					int leftRemainder = leftCharacter.lv_xp - leftCharacter.xp;
-					if (leftRemainder <= 1) {
+					if (leftRemainder <= (1 * leftCharacter.lv)) {
 						levelUpCharacter(leftCharacter);
-						leftCharacter.xp = 1 - leftRemainder;
+						leftCharacter.xp = (1 * leftCharacter.lv) - leftRemainder;
 						finished = true;
 						setChanged();
 						notifyObservers();
 					}
 					else {
-						leftCharacter.xp += 1;
+						leftCharacter.xp += (1 * leftCharacter.lv);
 						finished = true;
 						setChanged();
 						notifyObservers();
 					}
 					int rightRemainder = rightCharacter.lv_xp - rightCharacter.xp;
-					if (rightRemainder <= 5) {
+					if (rightRemainder <= (5 * leftCharacter.lv)) {
 						levelUpCharacter(rightCharacter);
-						rightCharacter.xp = 5 - rightRemainder;
+						rightCharacter.xp = (5 * leftCharacter.lv) - rightRemainder;
 						finished = true;
 						setChanged();
 						notifyObservers();
 					}
 					else {
-						rightCharacter.xp += 5;	
+						rightCharacter.xp += 5 * leftCharacter.lv;	
 						finished = true;
 						setChanged();
 						notifyObservers();
@@ -253,29 +263,29 @@ public class Game extends Observable implements Serializable {
 				}
 				else if (leftCharacter.curr_hp > 0 && rightCharacter.curr_hp == 0){
 					int leftRemainder = leftCharacter.lv_xp - leftCharacter.xp;
-					if (leftRemainder <= 5) {
+					if (leftRemainder <= (5 * rightCharacter.lv)) {
 						levelUpCharacter(leftCharacter);
-						leftCharacter.xp = 5 - leftRemainder;
+						leftCharacter.xp = (5 * rightCharacter.lv) - leftRemainder;
 						finished = true;
 						setChanged();
 						notifyObservers();
 					}
 					else {
-						leftCharacter.xp += 5;
+						leftCharacter.xp += 5 * rightCharacter.lv;
 						finished = true;
 						setChanged();
 						notifyObservers();
 					}
 					int rightRemainder = rightCharacter.lv_xp - rightCharacter.xp;
-					if (rightRemainder <= 1) {
+					if (rightRemainder <= (1 * rightCharacter.lv)) {
 						levelUpCharacter(rightCharacter);
-						rightCharacter.xp = 1 - rightRemainder;
+						rightCharacter.xp = (1 * rightCharacter.lv) - rightRemainder;
 						finished = true;
 						setChanged();
 						notifyObservers();
 					}
 					else {
-						rightCharacter.xp += 1;	
+						rightCharacter.xp += (1 * rightCharacter.lv);	
 						finished = true;
 						setChanged();
 						notifyObservers();

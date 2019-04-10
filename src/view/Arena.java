@@ -261,16 +261,23 @@ public class Arena extends JPanel implements Observer {
 				break;
 			}
 	    	
-			arenaGrid[0][1].setText("<html>Atk:&nbsp;&nbsp;&nbsp;" + leftCharacter.atk + "<br>Def:&nbsp;&nbsp;&nbsp;" + leftCharacter.def
-					              + "<br>SpA:&nbsp;&nbsp;&nbsp;" + leftCharacter.sp_atk + "<br>SpD:&nbsp;&nbsp;&nbsp;" + leftCharacter.sp_def
-					              + "<br>Spd:&nbsp;&nbsp;&nbsp;" + leftCharacter.spd);
+			arenaGrid[0][1].setText("<html>Atk:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(leftCharacter.atk).setScale(3, RoundingMode.HALF_UP)
+					+ "<br>Def:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(leftCharacter.def).setScale(3, RoundingMode.HALF_UP)
+					+ "<br>SpA:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(leftCharacter.sp_atk).setScale(3, RoundingMode.HALF_UP) 
+					+ "<br>SpD:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(leftCharacter.sp_def).setScale(3, RoundingMode.HALF_UP)
+					+ "<br>Spd:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(leftCharacter.spd).setScale(4, RoundingMode.HALF_UP));
+			
 			arenaGrid[0][2].setText("<html>" + leftCharacter.type + " lv. " + leftCharacter.lv + "<br><br>" + 
 									"HP:&nbsp;&nbsp;&nbsp;" + leftCharacter.hp + " / " + leftCharacter.hp + "</html>");
+			
 			arenaGrid[0][4].setText("<html>" + rightCharacter.type + " lv. " + rightCharacter.lv + "<br><br>" + 
 									"HP:&nbsp;&nbsp;&nbsp;" + rightCharacter.hp + " / " + rightCharacter.hp + "</html>");
-			arenaGrid[0][5].setText("<html>Atk:&nbsp;&nbsp;&nbsp;" + rightCharacter.atk + "<br>Def:&nbsp;&nbsp;&nbsp;" + rightCharacter.def
-		              + "<br>SpA:&nbsp;&nbsp;&nbsp;" + rightCharacter.sp_atk + "<br>SpD:&nbsp;&nbsp;&nbsp;" + rightCharacter.sp_def
-		              + "<br>Spd:&nbsp;&nbsp;&nbsp;" + rightCharacter.spd);
+			
+			arenaGrid[0][5].setText("<html>Atk:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(rightCharacter.atk).setScale(3, RoundingMode.HALF_UP) 
+					+ "<br>Def:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(rightCharacter.def).setScale(3, RoundingMode.HALF_UP)
+		            + "<br>SpA:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(rightCharacter.sp_atk).setScale(3, RoundingMode.HALF_UP)
+		            + "<br>SpD:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(rightCharacter.sp_def).setScale(3, RoundingMode.HALF_UP)
+		            + "<br>Spd:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(rightCharacter.spd).setScale(4, RoundingMode.HALF_UP));
 			
 	    	leftLabel.setIcon(new ImageIcon(leftCharacterImage));
 	    	rightLabel.setIcon(new ImageIcon(rightCharacterImage));
@@ -296,16 +303,23 @@ public class Arena extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		arenaGrid[0][1].setText("<html>Atk:&nbsp;&nbsp;&nbsp;" + leftCharacter.curr_atk + "<br>Def:&nbsp;&nbsp;&nbsp;" + leftCharacter.curr_def
-	              + "<br>SpA:&nbsp;&nbsp;&nbsp;" + leftCharacter.curr_sp_atk + "<br>SpD:&nbsp;&nbsp;&nbsp;" + leftCharacter.curr_sp_def
-	              + "<br>Spd:&nbsp;&nbsp;&nbsp;" + leftCharacter.curr_spd);
+		arenaGrid[0][1].setText("<html>Atk:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(leftCharacter.curr_atk).setScale(3, RoundingMode.HALF_UP)
+				+ "<br>Def:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(leftCharacter.curr_def).setScale(3, RoundingMode.HALF_UP)
+				+ "<br>SpA:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(leftCharacter.curr_sp_atk).setScale(3, RoundingMode.HALF_UP) 
+				+ "<br>SpD:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(leftCharacter.curr_sp_def).setScale(3, RoundingMode.HALF_UP)
+				+ "<br>Spd:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(leftCharacter.curr_spd).setScale(4, RoundingMode.HALF_UP));
+		
 		arenaGrid[0][2].setText("<html>" + leftCharacter.type + " lv. " + leftCharacter.lv + "<br><br>" + 
 			"HP:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(leftCharacter.curr_hp).setScale(1, RoundingMode.HALF_UP)  + " / " + leftCharacter.hp + "</html>");
+		
 		arenaGrid[0][4].setText("<html>" + rightCharacter.type + " lv. " + rightCharacter.lv + "<br><br>" + 
 				"HP:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(rightCharacter.curr_hp).setScale(1, RoundingMode.HALF_UP)  + " / " + rightCharacter.hp + "</html>");
-		arenaGrid[0][5].setText("<html>Atk:&nbsp;&nbsp;&nbsp;" + rightCharacter.curr_atk + "<br>Def:&nbsp;&nbsp;&nbsp;" + rightCharacter.curr_def
-	              + "<br>SpA:&nbsp;&nbsp;&nbsp;" + rightCharacter.curr_sp_atk + "<br>SpD:&nbsp;&nbsp;&nbsp;" + rightCharacter.curr_sp_def
-	              + "<br>Spd:&nbsp;&nbsp;&nbsp;" + rightCharacter.curr_spd);
+		
+		arenaGrid[0][5].setText("<html>Atk:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(rightCharacter.curr_atk).setScale(3, RoundingMode.HALF_UP) 
+				+ "<br>Def:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(rightCharacter.curr_def).setScale(3, RoundingMode.HALF_UP)
+	            + "<br>SpA:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(rightCharacter.curr_sp_atk).setScale(3, RoundingMode.HALF_UP)
+	            + "<br>SpD:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(rightCharacter.curr_sp_def).setScale(3, RoundingMode.HALF_UP)
+	            + "<br>Spd:&nbsp;&nbsp;&nbsp;" + BigDecimal.valueOf(rightCharacter.curr_spd).setScale(4, RoundingMode.HALF_UP));
 		
 		arenaGrid[2][2].setText("<html>" + "XP:&nbsp;&nbsp;&nbsp;" + leftCharacter.xp + " / " + leftCharacter.lv_xp + "<br><br></html>");
 		arenaGrid[2][4].setText("<html>" + "XP:&nbsp;&nbsp;&nbsp;" + rightCharacter.xp + " / " + rightCharacter.lv_xp + "<br><br></html>");

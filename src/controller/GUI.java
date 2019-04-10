@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Game;
 import view.Arena;
@@ -71,13 +72,34 @@ public class GUI extends JFrame implements Serializable {
 			String text = ((JMenuItem) e.getSource()).getText();
 	
 			if (text.equals("Reset Characters")) {
-				Game.resetLevels();
+				int userInput = JOptionPane.showConfirmDialog(null, "Reset all character levels?\n", "Select an Option",
+						JOptionPane.YES_NO_OPTION);
+				if (userInput == JOptionPane.YES_OPTION) {
+					Game.resetLevels();
+				}
+				else {
+					return;
+				}
 			}
 			if (text.equals("Save Characters")) {
-				Game.saveCharacters();
+				int userInput = JOptionPane.showConfirmDialog(null, "Save and overwrite current save?\n", "Select an Option",
+						JOptionPane.YES_NO_OPTION);
+				if (userInput == JOptionPane.YES_OPTION) {
+					Game.saveCharacters();
+				}
+				else {
+					return;
+				}
 			}
 			if (text.equals("Load Characters")) {
-				Game.loadCharacters();
+				int userInput = JOptionPane.showConfirmDialog(null, "Load previous save? Unsaved progress will be lost.\n", "Select an Option",
+						JOptionPane.YES_NO_OPTION);
+				if (userInput == JOptionPane.YES_OPTION) {
+					Game.loadCharacters();
+				}
+				else {
+					return;
+				}
 			}
 		}
 	}

@@ -112,7 +112,7 @@ public class Character implements Serializable {
 				this.sp_def = 12.5;
 				this.spd = 0.5;
 				this.xp = 0;
-				this.lv_xp = 20;
+				this.lv_xp = 15;
 				break;
 			case "Wizard":
 				this.lv = 1;
@@ -134,7 +134,7 @@ public class Character implements Serializable {
 				this.sp_def = 10;
 				this.spd = 1;
 				this.xp = 0;
-				this.lv_xp = 15;
+				this.lv_xp = 20;
 				break;
 			case "Lich":
 				this.lv = 1;
@@ -157,7 +157,7 @@ public class Character implements Serializable {
 				this.atk += 1;
 				this.def += 1;
 				this.sp_def += 1;
-				this.spd += 0.066;
+				this.spd += 0.0066;
 				this.xp = 0;
 				this.lv_xp = this.lv * 10;
 				break;
@@ -167,7 +167,7 @@ public class Character implements Serializable {
 				this.atk += 1.25;
 				this.def += 0.75;
 				this.sp_def += 0.75;
-				this.spd += 0.05;
+				this.spd += 0.005;
 				this.xp = 0;
 				this.lv_xp = this.lv * 10;
 				break;
@@ -177,7 +177,7 @@ public class Character implements Serializable {
 				this.atk += 1.5;
 				this.def += 0.5;
 				this.sp_def += 1;
-				this.spd += 0.075;
+				this.spd += 0.0075;
 				this.xp = 0;
 				this.lv_xp = this.lv * 10;
 				break;
@@ -187,7 +187,7 @@ public class Character implements Serializable {
 				this.atk += 1.75;
 				this.def += 1;
 				this.sp_def += 0.5;
-				this.spd += 0.035;
+				this.spd += 0.0035;
 				this.xp = 0;
 				this.lv_xp = this.lv * 15;
 				break;
@@ -198,7 +198,7 @@ public class Character implements Serializable {
 				this.def += 2.5;
 				this.sp_atk += 0.1;
 				this.sp_def += 1;
-				this.spd += 0.025;
+				this.spd += 0.0025;
 				this.xp = 0;
 				this.lv_xp = this.lv * 20;
 				break;
@@ -208,7 +208,7 @@ public class Character implements Serializable {
 				this.atk += 2;
 				this.def += 0.25;
 				this.sp_def += 0.5;
-				this.spd += 0.033;
+				this.spd += 0.0033;
 				this.xp = 0;
 				this.lv_xp = this.lv * 10;
 				break;
@@ -218,7 +218,7 @@ public class Character implements Serializable {
 				this.atk += 0.75;
 				this.def += 0.175;
 				this.sp_def += 0.5;
-				this.spd += 0.125;
+				this.spd += 0.0125;
 				this.xp = 0;
 				this.lv_xp = this.lv * 15;
 				break;
@@ -229,9 +229,9 @@ public class Character implements Serializable {
 				this.def += 0.5;
 				this.sp_atk += 0.25;
 				this.sp_def += 1.25;
-				this.spd += 0.05;
+				this.spd += 0.005;
 				this.xp = 0;
-				this.lv_xp = this.lv * 20;
+				this.lv_xp = this.lv * 15;
 				break;
 			case "Wizard":
 				this.lv += 1;
@@ -240,7 +240,7 @@ public class Character implements Serializable {
 				this.def += 0.175;
 				this.sp_atk += 0.75;
 				this.sp_def += 1.5;
-				this.spd += 0.075;
+				this.spd += 0.0075;
 				this.xp = 0;
 				this.lv_xp = this.lv * 10;
 				break;
@@ -251,9 +251,9 @@ public class Character implements Serializable {
 				this.def += 0.1;
 				this.sp_atk += 1.5;
 				this.sp_def += 1;
-				this.spd += 0.1;
+				this.spd += 0.01;
 				this.xp = 0;
-				this.lv_xp = this.lv * 15;
+				this.lv_xp = this.lv * 20;
 				break;
 			case "Lich":
 				this.lv += 1;
@@ -262,7 +262,7 @@ public class Character implements Serializable {
 				this.def += 0.1;
 				this.sp_atk += 0.5;
 				this.sp_def += 0.1;
-				this.spd += 0.025;
+				this.spd += 0.0025;
 				this.xp = 0;
 				this.lv_xp = this.lv * 25;
 				break;
