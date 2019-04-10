@@ -324,6 +324,7 @@ public class Arena extends JPanel implements Observer {
 		arenaGrid[2][2].setText("<html>" + "XP:&nbsp;&nbsp;&nbsp;" + leftCharacter.xp + " / " + leftCharacter.lv_xp + "<br><br></html>");
 		arenaGrid[2][4].setText("<html>" + "XP:&nbsp;&nbsp;&nbsp;" + rightCharacter.xp + " / " + rightCharacter.lv_xp + "<br><br></html>");
 		repaint();
+		
 		if (leftCharacter.curr_hp == 0 || rightCharacter.curr_hp == 0) {
 			fightButton.setEnabled(true);
 		}

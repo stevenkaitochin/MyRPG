@@ -198,8 +198,8 @@ public class Game extends Observable implements Serializable {
 				if (leftCharacter.curr_hp == 0 && rightCharacter.curr_hp == 0) {
 					int leftRemainder = leftCharacter.lv_xp - leftCharacter.xp;
 					if (leftRemainder <= (3 * rightCharacter.lv)) {
-						levelUpCharacter(leftCharacter);
 						leftCharacter.xp = (3 * rightCharacter.lv) - leftRemainder;
+						levelUpCharacter(leftCharacter);
 						finished = true;
 						setChanged();
 						notifyObservers();
@@ -212,8 +212,8 @@ public class Game extends Observable implements Serializable {
 					}
 					int rightRemainder = rightCharacter.lv_xp - rightCharacter.xp;
 					if (rightRemainder <= (3 * leftCharacter.lv)) {
-						levelUpCharacter(rightCharacter);
 						rightCharacter.xp = (3 * leftCharacter.lv) - rightRemainder;
+						levelUpCharacter(rightCharacter);
 						finished = true;
 						setChanged();
 						notifyObservers();
@@ -231,8 +231,8 @@ public class Game extends Observable implements Serializable {
 				else if (leftCharacter.curr_hp == 0 && rightCharacter.curr_hp > 0) {
 					int leftRemainder = leftCharacter.lv_xp - leftCharacter.xp;
 					if (leftRemainder <= (1 * leftCharacter.lv)) {
-						levelUpCharacter(leftCharacter);
 						leftCharacter.xp = (1 * leftCharacter.lv) - leftRemainder;
+						levelUpCharacter(leftCharacter);
 						finished = true;
 						setChanged();
 						notifyObservers();
@@ -245,8 +245,8 @@ public class Game extends Observable implements Serializable {
 					}
 					int rightRemainder = rightCharacter.lv_xp - rightCharacter.xp;
 					if (rightRemainder <= (5 * leftCharacter.lv)) {
-						levelUpCharacter(rightCharacter);
 						rightCharacter.xp = (5 * leftCharacter.lv) - rightRemainder;
+						levelUpCharacter(rightCharacter);
 						finished = true;
 						setChanged();
 						notifyObservers();
@@ -264,8 +264,8 @@ public class Game extends Observable implements Serializable {
 				else if (leftCharacter.curr_hp > 0 && rightCharacter.curr_hp == 0){
 					int leftRemainder = leftCharacter.lv_xp - leftCharacter.xp;
 					if (leftRemainder <= (5 * rightCharacter.lv)) {
-						levelUpCharacter(leftCharacter);
 						leftCharacter.xp = (5 * rightCharacter.lv) - leftRemainder;
+						levelUpCharacter(leftCharacter);
 						finished = true;
 						setChanged();
 						notifyObservers();
@@ -278,8 +278,8 @@ public class Game extends Observable implements Serializable {
 					}
 					int rightRemainder = rightCharacter.lv_xp - rightCharacter.xp;
 					if (rightRemainder <= (1 * rightCharacter.lv)) {
-						levelUpCharacter(rightCharacter);
 						rightCharacter.xp = (1 * rightCharacter.lv) - rightRemainder;
+						levelUpCharacter(rightCharacter);
 						finished = true;
 						setChanged();
 						notifyObservers();
