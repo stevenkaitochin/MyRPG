@@ -38,7 +38,7 @@ public class Game extends Observable implements Serializable {
 		// Weapon: Large axe			Ability1: WarCry - Raises attack by 50% for 3 seconds
 		characters.add(new Character("Raider", 		1, 200.0, 	17.5, 	10.0, 	0.0, 	5.0, 	0.35, 15));
 		// Weapon: Sword + Shield		Ability1: Paladin'sBlessing - Increases defense by 25% for 3 seconds and heals 25% total health
-		characters.add(new Character("Knight", 		1, 250.0, 	10.0, 	25.0, 	1.0, 	10.0, 	0.25, 20));
+		characters.add(new Character("Knight", 		1, 250.0, 	10.0, 	25.0, 	1.0, 	10.0, 	0.33, 20));
 		// Weapon: Bow + Arrow			Ability1: CriticalStrike - Next attack ignores armor and deals 50% more damage
 		characters.add(new Character("Archer", 		1, 100.0, 	20.0, 	2.5, 	0.0, 	5.0, 	0.33, 10));
 		// Weapon: Daggers				Ability1: NinjaShurikens - Attacks twice in quick succession and lowers target's speed by 50% for 3 seconds
@@ -200,6 +200,10 @@ public class Game extends Observable implements Serializable {
 					if (leftRemainder <= (3 * rightCharacter.lv)) {
 						leftCharacter.xp = (3 * rightCharacter.lv) - leftRemainder;
 						levelUpCharacter(leftCharacter);
+						while (leftCharacter.xp >= leftCharacter.lv_xp) {
+							leftCharacter.xp = leftCharacter.xp - leftCharacter.lv_xp;
+							levelUpCharacter(leftCharacter);
+						}
 						finished = true;
 						setChanged();
 						notifyObservers();
@@ -214,6 +218,10 @@ public class Game extends Observable implements Serializable {
 					if (rightRemainder <= (3 * leftCharacter.lv)) {
 						rightCharacter.xp = (3 * leftCharacter.lv) - rightRemainder;
 						levelUpCharacter(rightCharacter);
+						while (rightCharacter.xp >= rightCharacter.lv_xp) {
+							rightCharacter.xp = rightCharacter.xp - rightCharacter.lv_xp;
+							levelUpCharacter(rightCharacter);
+						}
 						finished = true;
 						setChanged();
 						notifyObservers();
@@ -247,6 +255,10 @@ public class Game extends Observable implements Serializable {
 					if (rightRemainder <= (5 * leftCharacter.lv)) {
 						rightCharacter.xp = (5 * leftCharacter.lv) - rightRemainder;
 						levelUpCharacter(rightCharacter);
+						while (rightCharacter.xp >= rightCharacter.lv_xp) {
+							rightCharacter.xp = rightCharacter.xp - rightCharacter.lv_xp;
+							levelUpCharacter(rightCharacter);
+						}
 						finished = true;
 						setChanged();
 						notifyObservers();
@@ -266,6 +278,10 @@ public class Game extends Observable implements Serializable {
 					if (leftRemainder <= (5 * rightCharacter.lv)) {
 						leftCharacter.xp = (5 * rightCharacter.lv) - leftRemainder;
 						levelUpCharacter(leftCharacter);
+						while (leftCharacter.xp >= leftCharacter.lv_xp) {
+							leftCharacter.xp = leftCharacter.xp - leftCharacter.lv_xp;
+							levelUpCharacter(leftCharacter);
+						}
 						finished = true;
 						setChanged();
 						notifyObservers();

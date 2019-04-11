@@ -77,7 +77,7 @@ public class Character implements Serializable {
 				this.def = 25;
 				this.sp_atk = 1;
 				this.sp_def = 10;
-				this.spd = 0.25;
+				this.spd = 0.33;
 				this.xp = 0;
 				this.lv_xp = 20;
 				break;
@@ -194,7 +194,7 @@ public class Character implements Serializable {
 				this.def += 2.5;
 				this.sp_atk += 0.1;
 				this.sp_def += 1;
-				this.spd += 0.0025;
+				this.spd += 0.0033;
 				this.lv_xp = this.lv * 20;
 				break;
 			case "Archer":
